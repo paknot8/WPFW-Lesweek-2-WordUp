@@ -1,0 +1,25 @@
+Woord: paarden, Klinkers: 3, Medeklinkers: 4
+Woord: bezem, Klinkers: 2, Medeklinkers: 3
+Woord: grond, Klinkers: 1, Medeklinkers: 4
+Woord: pot, Klinkers: 1, Medeklinkers: 2
+Woord: appel, Klinkers: 2, Medeklinkers: 3
+Woord: banaan, Klinkers: 3, Medeklinkers: 3
+Woord: bananen, Klinkers: 3, Medeklinkers: 4
+Woord: 
+schillen, Klinkers: 2, Medeklinkers: 6
+Woord: geschillen, Klinkers: 3, Medeklinkers: 7
+Woord: been, Klinkers: 2, Medeklinkers: 2
+Woord: gepakt, Klinkers: 2, Medeklinkers: 4
+Woord: gevonden, Klinkers: 3, Medeklinkers: 5
+Woord: lopen
+racecar, Klinkers: 5, Medeklinkers: 7
+Woord: negen, Klinkers: 2, Medeklinkers: 3
+Woord: lol, Klinkers: 1, Medeklinkers: 2
+Woord: acht, Klinkers: 1, Medeklinkers: 3
+Woord: tien, Klinkers: 2, Medeklinkers: 2
+Woord: kom, Klinkers: 1, Medeklinkers: 2
+Woord: wow, Klinkers: 1, Medeklinkers: 2
+Palindromen
+Woord: negen, Klinkers: 2, Medeklinkers: 3
+Woord: lol, Klinkers: 1, Medeklinkers: 2
+Woord: wow, Klinkers: 1, Medeklinkers: 2

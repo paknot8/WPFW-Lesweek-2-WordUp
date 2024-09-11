@@ -1,1 +1,3 @@
-paarden, bezem, grond, pot, appel, banaan, bananen, schillen, geschillen, been, gepakt, gevonden, lopen
+paarden, bezem, grond, pot, appel, banaan, bananen, 
+schillen, geschillen, been, gepakt, gevonden, lopen,
+racecar, negen, lol, acht, tien, kom, wow

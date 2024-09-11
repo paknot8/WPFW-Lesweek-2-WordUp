@@ -118,8 +118,14 @@ namespace WPFW_Lesweek_2_WordUp1
                 {
                     if (new FileInfo(uitvoerBestandNaam).Length > 0)
                     {
-                        Console.WriteLine($"Error: Output file '{uitvoerBestandNaam}' already exists and is not empty.");
-                        return;
+                        Console.WriteLine($"Output file '{uitvoerBestandNaam}' already exists and is not empty.");
+                        Console.Write("Do you want to overwrite it? (1 = yes, 2 = no): ");
+                        int answer = Convert.ToInt32(Console.ReadLine());
+                        if (answer == 2)
+                        {
+                            Console.WriteLine("Exiting...");
+                            Environment.Exit(0);
+                        }
                     }
                 }
 
@@ -127,6 +133,16 @@ namespace WPFW_Lesweek_2_WordUp1
                 foreach (Woord w in tekst.GetWoorden())
                 {
                     writer.WriteLine($"Woord: {w.Tekst}, Klinkers: {w.AantalKlinkers()}, Medeklinkers: {w.AantalMedeklinkers()}");
+                }
+
+                List<Woord> palindromen = tekst.Palindromen();
+                if (palindromen.Count > 0)
+                {
+                    writer.WriteLine("Palindromen");
+                    foreach (Woord p in palindromen)
+                    {
+                        writer.WriteLine($"Woord: {p.Tekst}, Klinkers: {p.AantalKlinkers()}, Medeklinkers: {p.AantalMedeklinkers()}");
+                    }
                 }
             }
             else
