@@ -67,24 +67,38 @@ namespace WPFW_Lesweek_2_WordUp1
                 return;
             }
 
-            if (!string.IsNullOrEmpty(invoerBestand))
+            string uitvoerBestandNaam;
+            if (invoerBestand.Contains("\\"))
             {
-                string uitvoerBestandNaam = invoerBestand.Substring(0, invoerBestand.LastIndexOf('\\'));
+                uitvoerBestandNaam = invoerBestand.Substring(0, invoerBestand.LastIndexOf('\\'));
                 uitvoerBestandNaam = Path.Combine(uitvoerBestandNaam, "uitvoer.txt");
-                using StreamWriter writer = File.CreateText(uitvoerBestandNaam);
-
-                foreach (Woord w in woordLijst)
-                {
-                    writer.WriteLine($"Woord: {w.Tekst}, Klinkers: {w.AantalKlinkers()}, Medeklinkers: {w.AantalMedeklinkers()}");
-                }
             }
             else
             {
-                Console.WriteLine("Error: Input file path is null or empty.");
+                uitvoerBestandNaam = "uitvoer.txt";
+            }
+
+            // Append a unique identifier to the output file name if it already exists
+            int counter = 1;
+            string tempUitvoerBestandNaam = uitvoerBestandNaam;
+            while (File.Exists(tempUitvoerBestandNaam))
+            {
+                tempUitvoerBestandNaam = $"{Path.GetFileNameWithoutExtension(uitvoerBestandNaam)}_{counter}{Path.GetExtension(uitvoerBestandNaam)}";
+                counter++;
+            }
+            uitvoerBestandNaam = tempUitvoerBestandNaam;
+
+            using StreamWriter writer = File.CreateText(uitvoerBestandNaam);
+
+            foreach (Woord w in woordLijst)
+            {
+                writer.WriteLine($"Woord: {w.Tekst}, Klinkers: {w.AantalKlinkers()}, Medeklinkers: {w.AantalMedeklinkers()}");
             }
         }
 
-        [GeneratedRegex(@"[^a-zA-Z0-9\s]")]
-        private static partial Regex MyRegex();
+        private static Regex MyRegex()
+        {
+            return new Regex(@"[^\w\s]");
+        }
     }
 }
