@@ -8,6 +8,21 @@
     - Heeft als uitvoerbestand:  C:\Temp\uitvoer.txt
 */
 
+/* --- WordUp2 ---
+    - Neem het programma Wordup1 als uitgangspunt, pas het programma zodanig aan dat:
+    - Er een class Tekst is die alle woorden van een tekst in zich heeft in een list van woorden
+    - Deze klasse heeft ook een attribuut van type ‘struct’ waarin de gegevens van het invoerbestand worden bewaard, gescheiden in pad en filenaam
+    - Geeft Tekst een methode GetWoorden() die de list met woorden teruggeeft zodat ze kunnen worden afgedrukt
+    - Geef Tekst een methode DraaiOm() die de volgorde van alle woorden omdraait (en dus opslaat in Tekst)
+*/
+
+/* --- WordUp3 ---
+    Neem het programma Wordup2 als uitgangspunt, pas het programma zodanig aan dat:
+    de class Tekst ook een methode Palindromen() heeft die alle woorden teruggeeft die palindromen zijn 
+    (dat zijn woorden die als je ze omdraait nog steeds hetzelfde zijn, dus ‘negen’ of ‘racecar’ of ‘lol’, etc.
+    pas je programma aan zodat ook dit in de outputfile terecht komt
+*/
+
 using System;
 using System.Text.RegularExpressions;
 using System.IO;
