@@ -1,26 +1,26 @@
 ﻿/*  --- WordUp1 ---
-    - Neem het programma KlinktBeter als uitgangspunt (je eigen versie of de standaarduitwerking die je gekregen hebt)
-    - Pas het programma aan, splits de ‘Woord’ klasse van program.cs en sla op in een eigen bestand woord.cs 
-    - Command line parameters: zorg dat het programma een parameter accepteert met daarin een pad naar 
-    het invoerbestand  (mag ook via de properties)
-    - Schrijf het uitvoerbestand met naam ‘uitvoer.txt’ op dezelfde plaats weg als waar het invoerbestand staat
-    - Dus bijv. deze aanroep:  .\WordUp1.exe C:\\Temp\\invoer.txt
-    - Heeft als uitvoerbestand:  C:\Temp\uitvoer.txt
+    Neem het programma KlinktBeter als uitgangspunt (je eigen versie of de standaarduitwerking die je gekregen hebt)
+        - Pas het programma aan, splits de ‘Woord’ klasse van program.cs en sla op in een eigen bestand woord.cs 
+        - Command line parameters: zorg dat het programma een parameter accepteert met daarin een pad naar 
+        het invoerbestand  (mag ook via de properties)
+        - Schrijf het uitvoerbestand met naam ‘uitvoer.txt’ op dezelfde plaats weg als waar het invoerbestand staat
+        - Dus bijv. deze aanroep:  .\WordUp1.exe C:\\Temp\\invoer.txt
+        - Heeft als uitvoerbestand:  C:\Temp\uitvoer.txt
 */
 
 /* --- WordUp2 ---
-    - Neem het programma Wordup1 als uitgangspunt, pas het programma zodanig aan dat:
-    - Er een class Tekst is die alle woorden van een tekst in zich heeft in een list van woorden
-    - Deze klasse heeft ook een attribuut van type ‘struct’ waarin de gegevens van het invoerbestand worden bewaard, gescheiden in pad en filenaam
-    - Geeft Tekst een methode GetWoorden() die de list met woorden teruggeeft zodat ze kunnen worden afgedrukt
-    - Geef Tekst een methode DraaiOm() die de volgorde van alle woorden omdraait (en dus opslaat in Tekst)
+    Neem het programma Wordup1 als uitgangspunt, pas het programma zodanig aan dat:
+        - Er een class Tekst is die alle woorden van een tekst in zich heeft in een list van woorden
+        - Deze klasse heeft ook een attribuut van type ‘struct’ waarin de gegevens van het invoerbestand worden bewaard, gescheiden in pad en filenaam
+        - Geeft Tekst een methode GetWoorden() die de list met woorden teruggeeft zodat ze kunnen worden afgedrukt
+        - Geef Tekst een methode DraaiOm() die de volgorde van alle woorden omdraait (en dus opslaat in Tekst)
 */
 
 /* --- WordUp3 ---
     Neem het programma Wordup2 als uitgangspunt, pas het programma zodanig aan dat:
-    de class Tekst ook een methode Palindromen() heeft die alle woorden teruggeeft die palindromen zijn 
-    (dat zijn woorden die als je ze omdraait nog steeds hetzelfde zijn, dus ‘negen’ of ‘racecar’ of ‘lol’, etc.
-    pas je programma aan zodat ook dit in de outputfile terecht komt
+        - de class Tekst ook een methode Palindromen() heeft die alle woorden teruggeeft die palindromen zijn 
+        - (dat zijn woorden die als je ze omdraait nog steeds hetzelfde zijn, dus ‘negen’ of ‘racecar’ of ‘lol’, etc.
+        - pas je programma aan zodat ook dit in de outputfile terecht komt
 */
 
 using System;
