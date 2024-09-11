@@ -41,7 +41,7 @@ namespace WPFW_Lesweek_2_WordUp1
             }
 
             string invoerBestand = args[0]; // takes the first file it sees
-            if (!File.Exists(invoerBestand))
+            if (!File.Exists(invoerBestand) || invoerBestand == null)
             {
                 Console.WriteLine($"Error: Input file '{invoerBestand}' does not exist.");
                 return;
@@ -49,12 +49,29 @@ namespace WPFW_Lesweek_2_WordUp1
             OpdrachtWordUp(args);
         }
 
+        // Processes the input file, extracts words, and writes the output to a file named "uitvoer.txt" 
+        // in the same directory as the input file.
         public static void OpdrachtWordUp(string[] args)
         {
             string invoerBestand = args[0]; // takes the first file it sees
             string bestandInhoud = File.ReadAllText(invoerBestand);
             List<Woord> woordLijst = OpdrachtKlinkers(bestandInhoud);
-            SchrijfUitvoerBestand(invoerBestand, woordLijst);
+
+            BestandInfo bestandInfo;
+            if (invoerBestand != null)
+            {
+                bestandInfo = new BestandInfo { Pad = Path.GetDirectoryName(invoerBestand), FileName = Path.GetFileName(invoerBestand) };
+            }
+            else
+            {
+                Console.WriteLine("Error: Input file is null.");
+                return;
+            }
+
+            Tekst tekst = new Tekst(woordLijst, bestandInfo);
+
+            SchrijfUitvoerBestand(invoerBestand, tekst);
+            tekst.DraaiOm(); // Reverse the word order
         }
 
         // Processes the input file content and returns a list of Woord objects
@@ -90,24 +107,31 @@ namespace WPFW_Lesweek_2_WordUp1
         }
 
         // Writes the output to a file named "uitvoer.txt" in the same directory as the input file
-        private static void SchrijfUitvoerBestand(string invoerBestand, List<Woord> woordLijst)
+        private static void SchrijfUitvoerBestand(string invoerBestand, Tekst tekst)
         {
             string invoerDir = Path.GetDirectoryName(invoerBestand);
-            string uitvoerBestandNaam = Path.Combine(invoerDir, "uitvoer.txt");
-
-            if (File.Exists(uitvoerBestandNaam))
+            if (invoerDir != null)
             {
-                if (new FileInfo(uitvoerBestandNaam).Length > 0)
+                string uitvoerBestandNaam = Path.Combine(invoerDir, "uitvoer.txt");
+
+                if (File.Exists(uitvoerBestandNaam))
                 {
-                    Console.WriteLine($"Error: Output file '{uitvoerBestandNaam}' already exists and is not empty.");
-                    return;
+                    if (new FileInfo(uitvoerBestandNaam).Length > 0)
+                    {
+                        Console.WriteLine($"Error: Output file '{uitvoerBestandNaam}' already exists and is not empty.");
+                        return;
+                    }
+                }
+
+                using StreamWriter writer = File.CreateText(uitvoerBestandNaam);
+                foreach (Woord w in tekst.GetWoorden())
+                {
+                    writer.WriteLine($"Woord: {w.Tekst}, Klinkers: {w.AantalKlinkers()}, Medeklinkers: {w.AantalMedeklinkers()}");
                 }
             }
-
-            using StreamWriter writer = File.CreateText(uitvoerBestandNaam);
-            foreach (Woord w in woordLijst)
+            else
             {
-                writer.WriteLine($"Woord: {w.Tekst}, Klinkers: {w.AantalKlinkers()}, Medeklinkers: {w.AantalMedeklinkers()}");
+                Console.WriteLine("Error: Input file directory is null.");
             }
         }
 
