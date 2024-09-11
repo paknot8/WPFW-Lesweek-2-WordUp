@@ -19,18 +19,30 @@ namespace WPFW_Lesweek_2_WordUp1
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0)
+            if (args.Length == 0) // if there is no file ex: dotnet run invoer.txt
             {
                 Console.WriteLine("Error: No input file specified.");
                 return;
             }
 
-            string invoerBestand = args[0];
+            string invoerBestand = args[0]; // takes the first file it sees
+            if (!File.Exists(invoerBestand))
+            {
+                Console.WriteLine($"Error: Input file '{invoerBestand}' does not exist.");
+                return;
+            }
+            OpdrachtWordUp(args);
+        }
+
+        public static void OpdrachtWordUp(string[] args)
+        {
+            string invoerBestand = args[0]; // takes the first file it sees
             string bestandInhoud = File.ReadAllText(invoerBestand);
             List<Woord> woordLijst = OpdrachtKlinkers(bestandInhoud);
             SchrijfUitvoerBestand(invoerBestand, woordLijst);
         }
 
+        // Processes the input file content and returns a list of Woord objects
         public static List<Woord> OpdrachtKlinkers(string bestandInhoud)
         {
             string tekst = VerwijderBijzondereTekens(bestandInhoud);
@@ -38,16 +50,19 @@ namespace WPFW_Lesweek_2_WordUp1
             return MaakWoordLijst(woorden);
         }
 
+        // Removes special characters from the input text and converts to lowercase
         private static string VerwijderBijzondereTekens(string tekst)
         {
             return MyRegex().Replace(tekst, "").ToLower();
         }
 
+        // Splits the input text into individual words
         private static string[] SplitTekstInWoorden(string tekst)
         {
             return tekst.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        // Creates a list of Woord objects from the input words
         private static List<Woord> MaakWoordLijst(string[] woorden)
         {
             List<Woord> woordLijst = new List<Woord>();
@@ -59,43 +74,29 @@ namespace WPFW_Lesweek_2_WordUp1
             return woordLijst;
         }
 
+        // Writes the output to a file named "uitvoer.txt" in the same directory as the input file
         private static void SchrijfUitvoerBestand(string invoerBestand, List<Woord> woordLijst)
         {
-            if (string.IsNullOrEmpty(invoerBestand))
-            {
-                Console.WriteLine("Error: Input file path is null or empty.");
-                return;
-            }
+            string invoerDir = Path.GetDirectoryName(invoerBestand);
+            string uitvoerBestandNaam = Path.Combine(invoerDir, "uitvoer.txt");
 
-            string uitvoerBestandNaam;
-            if (invoerBestand.Contains("\\"))
+            if (File.Exists(uitvoerBestandNaam))
             {
-                uitvoerBestandNaam = invoerBestand.Substring(0, invoerBestand.LastIndexOf('\\'));
-                uitvoerBestandNaam = Path.Combine(uitvoerBestandNaam, "uitvoer.txt");
+                if (new FileInfo(uitvoerBestandNaam).Length > 0)
+                {
+                    Console.WriteLine($"Error: Output file '{uitvoerBestandNaam}' already exists and is not empty.");
+                    return;
+                }
             }
-            else
-            {
-                uitvoerBestandNaam = "uitvoer.txt";
-            }
-
-            // Append a unique identifier to the output file name if it already exists
-            int counter = 1;
-            string tempUitvoerBestandNaam = uitvoerBestandNaam;
-            while (File.Exists(tempUitvoerBestandNaam))
-            {
-                tempUitvoerBestandNaam = $"{Path.GetFileNameWithoutExtension(uitvoerBestandNaam)}_{counter}{Path.GetExtension(uitvoerBestandNaam)}";
-                counter++;
-            }
-            uitvoerBestandNaam = tempUitvoerBestandNaam;
 
             using StreamWriter writer = File.CreateText(uitvoerBestandNaam);
-
             foreach (Woord w in woordLijst)
             {
                 writer.WriteLine($"Woord: {w.Tekst}, Klinkers: {w.AantalKlinkers()}, Medeklinkers: {w.AantalMedeklinkers()}");
             }
         }
 
+        // Returns a Regex object that matches any character that is not a word character or whitespace
         private static Regex MyRegex()
         {
             return new Regex(@"[^\w\s]");
